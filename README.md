@@ -2,23 +2,23 @@
 
 ## The Workload
 
-The workload read data from Softlayer Object Storage [Reference](https://github.com/SparkTC/stocator), then write data using Spark SQL. 
+The workload read data from Softlayer Object Storage with [Spark Swift integration](https://github.com/SparkTC/stocator), then write data to a DataStore using Spark SQL. The run results, throughput and latency, are stored as CSV file in Softlayer Object Storage too.
 
-* [Reference for high level overview](docs/SparkSQL_Workload.pdf)
-* [Reference for the workload details in Spark SQL Python](python/workload.py)
+* Reference [the high level overview](docs/SparkSQL_Workload.pdf)
+* Reference [the the workload details in Spark SQL Python](python/workload.py)
 
 ### A sample run against ElasticSearch
 
 	export marathonIp=MARATHON_IP
 	curl -i -H 'Content-Type: application/json' -d@marathon-es.json $marathonIp:8080/v2/apps
 
-* [Start ElasticSearch with Marathon Json](config/es.json)
+* [Start ElasticSearch with Marathon JSON](config/es.json)
 * [Start workload with Marathon JSON](config/marathon-es.json)
 
 
 ### The Spark Mesos Docker Image 
 
-The image is used for both Spark job submission and Spark executor on Mesos. [Reference Dockerfile](docker/Dockerfile)
+The image is used for both Spark job submission and Spark executor on Mesos. Reference [the Dockerfile](docker/Dockerfile)
 
 * Built on top of mesosphere/mesos:1.0.0 image
 * Install Spark 2.0.1 with Hadoop 2.7
