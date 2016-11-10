@@ -5,7 +5,7 @@
 The workload read data from Softlayer Object Storage with [Spark Swift integration](https://github.com/SparkTC/stocator), then write data to a DataStore using Spark SQL. The run results, throughput and latency, are stored as CSV file in Softlayer Object Storage too.
 
 * Reference [the high level overview](docs/SparkSQL_Workload.pdf)
-* Reference [the the workload details in Spark SQL Python](python/workload.py)
+* Reference [the workload details in Python using Spark SQL](python/workload.py)
 
 ### A sample run against ElasticSearch
 
