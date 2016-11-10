@@ -164,7 +164,7 @@ while (remaining > 0 ):
         totalRecords= aDF.count()
         totalPartitions = aDF.rdd.getNumPartitions()
 
-        if (partitionNum!=-1 and partitionNum != totalPartitions):
+        if (partitionNum>0 and partitionNum != totalPartitions):
             aDF = aDF.repartition(partitionNum)
             totalPartitions = aDF.rdd.getNumPartitions()
     
