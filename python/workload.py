@@ -18,7 +18,7 @@
 #     - Repeat: indicates a total number of DataFrame to save. 
 #     - Sample: indicates the sample ratio for a given file. The max DataFrame created for a given file is int(1/sample)
 #     - FileNameSuffixPattern: used when Repeat > Max DataFrame per file. The additional files are loaded with suffix of fileNameSuffixPattern.replace("index",nextFileIndex).
-#     - PartitionNum: the partition number the DF 
+#     - PartitionNum: the partition number the DataFrame. -1 will use default
 #
 # To Execute:
 #
@@ -58,7 +58,7 @@ startIndex=int(os.getenv("START_INDEX",0))
 fileNameSuffixPattern=os.getenv("FILENAME_SUFFIX_PATTERN","(index)")
 interval=int(os.getenv("INTERVAL","10"))
 preload=os.getenv("PRELOAD","true")
-partitionNum=int(os.getenv("PARTITION_NUM","2"))
+partitionNum=int(os.getenv("PARTITION_NUM","-1"))
 
 conf = SparkConf().setAppName("Workload in Spark SQL Python for "+format +" to "+datastore+"start at "+str(startIndex)+" iterate "+  str(repeat) +" times with sampling " +str(sample) +" of seed "+str(seed) +" in partitions:" +str(partitionNum))
 
@@ -164,7 +164,7 @@ while (remaining > 0 ):
         totalRecords= aDF.count()
         totalPartitions = aDF.rdd.getNumPartitions()
 
-        if (partitionNum != totalPartitions):
+        if (partitionNum!=-1 and partitionNum != totalPartitions):
             aDF = aDF.repartition(partitionNum)
             totalPartitions = aDF.rdd.getNumPartitions()
     
