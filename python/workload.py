@@ -129,10 +129,10 @@ def writeDF(sampleDF):
         duration= time.time()-begin_ts
         rate = count / duration
         print "Cache count:", count, "/duration:" ,duration, "=", rate, "/s"
-    begin_ts = time.time()
     print 'saving the dataframe'
     # Need special treatment to Cassandra keyspace and table
     name = datastore.split(":")
+    begin_ts = time.time()
     if (len(name) == 1 ):
         sampleDF.write.mode('append').format(format).save(name[0])
     else:
