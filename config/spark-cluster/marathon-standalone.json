@@ -1,0 +1,30 @@
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+        "image": "yanglei99/spark_mesosphere_mesos",
+        "network": "HOST",
+        "portMappings": [ ]
+    },
+	"volumes": [
+	      {
+	    	  "containerPath": "/spark/job/CloudantDF.py",
+	    	  "hostPath": "./CloudantDF.py",
+	          "mode": "RW"
+	      }
+	]
+  },
+  "id": "spark/standalone",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "uris": [
+           "https://s3-us-west-1.amazonaws.com/mydata.yl/CloudantDF.py"
+           ],
+  "env":{
+	  "SPARK_MASTER_ID": "spark/master",
+	  "SPARK_ADDITIONAL_CONFIG":"--conf spark.cloudant.host=yourhost.cloudant.com --conf spark.cloudant.username=your.username --conf spark.cloudant.password=your.userpassword",
+	  "SPARK_ADDITIONAL_JARS":"--repositories https://repository.apache.org/content/groups/snapshots --packages org.apache.bahir:spark-sql-cloudant_2.11:2.2.0-SNAPSHOT",
+	  "SPARK_JOB": "CloudantDF.py"
+  }
+}

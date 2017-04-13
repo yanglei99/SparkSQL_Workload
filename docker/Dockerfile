@@ -1,4 +1,4 @@
-FROM       mesosphere/mesos:1.0.0
+FROM       mesosphere/mesos:1.2.0
 MAINTAINER Yang Lei <yanglei@us.ibm.com>
 
 # The generic Spark Mesos Docker image
@@ -19,12 +19,12 @@ MAINTAINER Yang Lei <yanglei@us.ibm.com>
 
 RUN apt-get update && apt-get install -y wget curl
 
-# Download prebuild Spark 2.0.1 with Hadoop 2.7+
+# Download prebuild Spark 2.1.0 with Hadoop 2.7+
 
-RUN wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.1-bin-hadoop2.7.tgz
+RUN wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
 RUN mkdir -p /usr/local
-RUN tar -xvzf spark-2.0.1-bin-hadoop2.7.tgz -C /usr/local
-ENV SPARK_HOME /usr/local/spark-2.0.1-bin-hadoop2.7
+RUN tar -xvzf spark-2.1.0-bin-hadoop2.7.tgz -C /usr/local
+ENV SPARK_HOME /usr/local/spark-2.1.0-bin-hadoop2.7
 ENV PATH $SPARK_HOME/bin:$PATH
 
 # Install JQ for processing JSON when needed
@@ -63,12 +63,17 @@ ENV SPARK_PROCESS_NAME application
 ENV SPARK_MASTER mesos://zk://leader.mesos:2181/mesos
 ENV SPARK_MESOS_COARSE true
 
-#ENV SPARK_ADDITIONAL_CONFIG --conf spark.mesos.executor.docker.image=yanglei99/spark_meso
+#ENV SPARK_ADDITIONAL_CONFIG --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos
 #ENV SPARK_ADDITIONAL_JARS --packages --jars
-#ENV SPARK_JOB CloudantDF.py
+#ENV SPARK_JOB workload.py
 
 #ENV SPARK_MASTER_ID spark/master
 #ENV SPARK_MASTER_HOST
+
+ENV SPARK_MASTER_PORT 7077
+ENV SPARK_MASTER_WEBUI_PORT 8080
+ENV SPARK_WORKER_WEBUI_PORT 8081
+ENV SPARK_USE_PRIVATE_NETWORK true
 
 CMD ["/spark/run.sh"]
 

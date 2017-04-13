@@ -18,10 +18,6 @@ The workload read data from Softlayer Object Storage with [Spark Swift integrati
 
 ### The Spark Mesos Docker Image 
 
-The image is used for both Spark job submission and Spark executor on Mesos. Reference [the Dockerfile](docker/Dockerfile)
+The image is used for both Spark job submission and Spark executor on Mesos, besides it can be used to start Spark Standalone cluster. 
 
-* Built on top of mesosphere/mesos:1.0.0 image
-* Install Spark 2.0.1 with Hadoop 2.7
-* Install Java 8
-
-
+[Reference](config/spark-cluster/README.md)

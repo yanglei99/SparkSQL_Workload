@@ -1,0 +1,18 @@
+{
+  "id": "spark/master",
+  "container": {
+    "docker": {
+      "image": "yanglei99/spark_mesosphere_mesos",
+      "network": "HOST"
+    }
+  },
+  "cpus": 1,
+  "mem": 1024,
+  "env": {
+	  "SPARK_PROCESS_NAME":"master",
+	  "SPARK_MASTER_WEBUI_PORT": "8090",
+	  "SPARK_USE_PRIVATE_NETWORK": "false"
+  },
+  "instances": 1,
+  "constraints": [["hostname", "UNIQUE"]]
+}
