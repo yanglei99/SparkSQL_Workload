@@ -48,7 +48,7 @@ Spark Slave job description for [using private network](marathon-slave.json), or
 
 Note:
 
-* The slave can use Spark-Master's Marathon task name to calculate the Spark master IP address, `SPARK_MASTER_ID=spark/master`. You can also set IP directly by  `SPARK_MASTER_HOST=xxx.xxx.xxx.xxx` or `SPARK_MASTER=spark://xxx.xxx.xxx.xxx:xxxx`
+* The slave can use Spark-Master's Marathon task name to calculate the Spark master IP address, `SPARK_MASTER_ID=spark/master`. You can also set IP directly by  `SPARK_MASTER_HOST=xxx.xxx.xxx.xxx` or `SPARK_MASTER=spark://xxx.xxx.xxx.xxx:7077`
 
 * IP address are calculated with private network by default. You can use `SPARK_USE_PRIVATE_NETWORK=false` to use public network
 
