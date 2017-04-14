@@ -1,0 +1,41 @@
+{
+	  "container": {
+		    "type": "DOCKER",
+		    "docker": {
+		      "image": "yanglei99/spark_mesosphere_mesos",
+		      "network": "HOST",
+		      "portMappings": [ ]
+		    },
+			"volumes": [
+			      {
+			    	  "containerPath": "/spark/job/workload.py",
+			    	  "hostPath": "./workload.py",
+			          "mode": "RW"
+			      }
+			]
+		  },
+    "id": "spark.es",
+    "cpus": 3,
+    "mem": 6144,
+    "instances": 1,
+    "acceptedResourceRoles": ["slave_public"],
+    "uris": [
+             "https://s3-us-west-1.amazonaws.com/mydata.yl/workload.py"
+             ],
+    "env": {
+        "ST_KEY":"API KEY",
+        "ST_USER":"ACCOUNT:USER",
+        "ST_AUTH":"AUTH URL",
+        "ST_CONTAINER":"CONTAINER NAME",
+        "SAMPLE_RATIO":"1",
+        "REPEAT":"5",
+        "PARTITION_NUM":"20",
+        "FILENAME_PATTERN":"{0}({1})",
+        "START_INDEX":"0",
+        "FORMAT":"es",
+        "DATASTORE":"spark/workload",
+        "SPARK_ADDITIONAL_CONFIG":"--conf spark.es.batch.size.entries=100 --conf spark.es.index.auto.create=true --conf spark.es.net.http.auth.user=elastic --conf spark.es.net.http.auth.pass=changeme --conf spark.cores.max=30 --conf spark.executor.memory=6g --conf spark.executor.cores=3 --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos --conf spark.es.nodes.discovery=false --conf spark.es.nodes.wan.only=true --conf spark.es.nodes=es.marathon.mesos",
+        "SPARK_ADDITIONAL_JARS":"--packages org.elasticsearch:elasticsearch-spark-20_2.11:5.0.0,com.databricks:spark-csv_2.11:1.5.0,com.ibm.stocator:stocator:1.0.1",
+        "SPARK_JOB": "workload.py fileName"
+    }
+}

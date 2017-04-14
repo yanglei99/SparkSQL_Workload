@@ -10,10 +10,11 @@ The workload read data from Softlayer Object Storage with [Spark Swift integrati
 ### A sample run against ElasticSearch
 
 	export marathonIp=MARATHON_IP
-	curl -i -H 'Content-Type: application/json' -d@marathon-es.json $marathonIp:8080/v2/apps
+	curl -i -H 'Content-Type: application/json' -d@config/es/marathon-es.json $marathonIp:8080/v2/apps
 
-* [Start ElasticSearch with Marathon JSON](config/es.json)
-* [Start workload with Marathon JSON](config/marathon-es.json)
+* [Start ElasticSearch in Marathon JSON](config/es/es.json)
+* [Start workload in Marathon JSON](config/es/marathon-es.json)
+* [Start workload with file index pattern in Marathon JSON](config/es/marathon-es-index.json)
 
 
 ### The Spark Mesos Docker Image 
