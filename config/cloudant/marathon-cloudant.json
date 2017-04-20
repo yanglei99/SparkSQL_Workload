@@ -1,0 +1,41 @@
+{
+	  "container": {
+		    "type": "DOCKER",
+		    "docker": {
+		      "image": "yanglei99/spark_mesosphere_mesos",
+		      "network": "HOST",
+		      "portMappings": [ ]
+		    },
+			"volumes": [
+			      {
+			    	  "containerPath": "/spark/job/workload.py",
+			    	  "hostPath": "./workload.py",
+			          "mode": "RW"
+			      }
+			]
+		  },
+    "id": "spark.cloudant",
+    "cpus": 3,
+    "mem": 6144,
+    "instances": 1,
+    "acceptedResourceRoles": ["slave_public"],
+    "uris": [
+             "https://s3-us-west-1.amazonaws.com/mydata.yl/workload.py"
+             ],
+    "env": {
+        "ST_KEY":"API KEY",
+        "ST_USER":"ACCOUNT:USER",
+        "ST_AUTH":"AUTH URL",
+        "ST_CONTAINER":"CONTAINER NAME",
+        "SAMPLE_RATIO":"0.02",
+        "REPEAT":"10",
+        "PARTITION_NUM":"-1",
+        "FILENAME_PATTERN":"{0}",
+        "SCHEMA":"eventType:string timestamp:long version:long platform:string eventData:string",
+        "FORMAT":"org.apache.bahir.cloudant",
+        "DATASTORE":"workload",
+        "SPARK_ADDITIONAL_CONFIG":"--conf spark.jsonstore.rdd.bulkSize=50  --conf spark.cores.max=12 --conf spark.executor.memory=6g --conf spark.executor.cores=3 --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos --conf spark.cloudant.host=YOUR.HOST --conf spark.cloudant.username=YOUR.USER --conf spark.cloudant.password=YOUR.PASS",
+        "SPARK_ADDITIONAL_JARS":"--repositories https://repository.apache.org/content/groups/snapshots --packages org.apache.bahir:spark-sql-cloudant_2.11:2.2.0-SNAPSHOT,com.databricks:spark-csv_2.11:1.5.0,com.ibm.stocator:stocator:1.0.1",
+        "SPARK_JOB": "workload.py filename"
+    }
+}

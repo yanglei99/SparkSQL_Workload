@@ -20,6 +20,7 @@
 #     - FILENAME_PATTERN: used when Repeat > Max DataFrame per file. The additional files are loaded using .format(filename, str(index))
 #     - PARTITION_NUM: the DataFrame partitions. -1 will rely on source loader
 #     - SCHEMA: a space separated string of fieldName:fieldType which will be used to calculate schema. 
+#     - TRANSFORM: transform the schema with the select definition
 #
 # To Execute, an example for ES
 #
@@ -70,6 +71,7 @@ interval=int(os.getenv("INTERVAL","10"))
 preload=os.getenv("PRELOAD","true")
 partitionNum=int(os.getenv("PARTITION_NUM","-1"))
 schemaStr=os.getenv("SCHEMA","")
+transformStr=os.getenv("TRANSFORM","")
 
 schema = None
 
@@ -108,7 +110,7 @@ if (len(schemaStr)>0):
             
     schema = StructType(fields)
 
-print "Workload in Spark SQL Python for ", format, " to ", datastore , "start at ", str(startIndex), " iterate ", str(repeat), " times with sampling ", str(sample), " of seed ", str(seed), " in partitions ", str(partitionNum)
+print "Workload in Spark SQL Python for ", format, " to ", datastore , " start at ", str(startIndex), " iterate ", str(repeat), " times with sampling ", str(sample), " of seed ", str(seed), " in partitions ", str(partitionNum)
 
 conf = SparkConf().setAppName("Workload in Spark SQL Python")
 
@@ -217,6 +219,10 @@ while (remaining > 0 ):
     for i in range(splitTotal):
         aDF=splitDF[i]
         
+        if (len(transformStr) >0 ):
+            aDF.createOrReplaceTempView("workload")
+            aDF = sqlContext.sql('SELECT {} FROM workload'.format(transformStr))
+            
         if (showSchema):
             aDF.printSchema()
             aDF.show()

@@ -1,0 +1,19 @@
+{
+  "id": "cassandra",
+  "container": {
+    "docker": {
+      "image": "cassandra",
+      "network": "HOST",
+      "privileged": true,
+      "parameters": []
+    }
+  },
+  "cpus": 4,
+  "mem": 6144,
+  "env": {
+	  "CASSANDRA_CLUSTER_NAME": "mycas",
+	  "CASSANDRA_LISTEN_ADDRESS":"YOUR.SEED"
+  },
+  "instances": 1,
+  "constraints": [["hostname", "LIKE", "YOUR.SEED"]]
+} 

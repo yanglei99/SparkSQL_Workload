@@ -16,6 +16,10 @@ The workload read data from Softlayer Object Storage with [Spark Swift integrati
 * [Start workload in Marathon JSON](config/es/marathon-es.json)
 * [Start workload with file index pattern in Marathon JSON](config/es/marathon-es-index.json)
 
+#### Other run examples
+
+* [Cloudant](config/cloudant)
+* [Cassandra](config/cassandra)
 
 ### The Spark Mesos Docker Image 
 

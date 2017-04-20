@@ -1,0 +1,42 @@
+{
+	  "container": {
+		    "type": "DOCKER",
+		    "docker": {
+		      "image": "yanglei99/spark_mesosphere_mesos",
+		      "network": "HOST",
+		      "portMappings": [ ]
+		    },
+			"volumes": [
+			      {
+			    	  "containerPath": "/spark/job/workload.py",
+			    	  "hostPath": "./workload.py",
+			          "mode": "RW"
+			      }
+			]
+		  },
+    "id": "spark.cassandra",
+    "cpus": 3,
+    "mem": 6144,
+    "instances": 1,
+    "acceptedResourceRoles": ["slave_public"],
+    "uris": [
+             "https://s3-us-west-1.amazonaws.com/mydata.yl/workload.py"
+             ],
+    "env": {
+        "ST_KEY":"API KEY",
+        "ST_USER":"ACCOUNT:USER",
+        "ST_AUTH":"AUTH URL",
+        "ST_CONTAINER":"CONTAINER NAME",
+        "SAMPLE_RATIO":"0.03",
+        "REPEAT":"5",
+        "PARTITION_NUM":"-1",
+        "FILENAME_PATTERN":"{0}",
+        "SCHEMA":"eventType:string timestamp:long version:long platform:string eventData:string",
+        "TRANSFORM":"eventType as eventtype, timestamp, version, platform, eventData as eventdata",
+        "FORMAT":"org.apache.spark.sql.cassandra",
+        "DATASTORE":"workload_ks:workload",
+        "SPARK_ADDITIONAL_CONFIG":"--conf spark.cassandra.output.batch.size.rows=50 --conf spark.cassandra.output.concurrent.writes=30 --conf spark.cores.max=12 --conf spark.executor.memory=6g --conf spark.executor.cores=3 --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos --conf spark.mesos.executor.docker.image=yanglei99/spark_mesosphere_mesos --conf spark.cassandra.connection.host=YOUR.HOST",
+        "SPARK_ADDITIONAL_JARS":"--packages com.datastax.spark:spark-cassandra-connector_2.11:2.0.1,com.databricks:spark-csv_2.11:1.5.0,com.ibm.stocator:stocator:1.0.1",
+        "SPARK_JOB": "workload.py fileName"
+    }
+}
