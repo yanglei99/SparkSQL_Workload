@@ -1,0 +1,22 @@
+{
+  "id": "scylladb",
+  "container": {
+    "docker": {
+      "image": "scylladb/scylla",
+      "network": "HOST",
+      "privileged": true,
+      "parameters": []
+    }
+  },
+  "args": [
+           "--listen-address", "YOUR.SEED",
+           "--broadcast-rpc-address", "0.0.0.0",
+           "--memory","6G",
+           "--smp", "4"
+         ],
+  "cpus": 4,
+  "mem": 6144,
+  "env": { },
+  "instances": 1,
+  "constraints": [["hostname", "LIKE", "YOUR.SEED"]]
+} 

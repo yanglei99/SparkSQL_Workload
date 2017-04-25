@@ -27,7 +27,7 @@
         "ST_USER":"ACCOUNT:USER",
         "ST_AUTH":"AUTH URL",
         "ST_CONTAINER":"CONTAINER NAME",
-        "SAMPLE_RATIO":"0.03",
+        "SAMPLE_RATIO":"0.02",
         "REPEAT":"5",
         "PARTITION_NUM":"-1",
         "FILENAME_PATTERN":"{0}",

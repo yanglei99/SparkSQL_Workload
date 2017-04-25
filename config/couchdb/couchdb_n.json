@@ -1,0 +1,21 @@
+{
+  "id": "couchdb.n",
+  "container": {
+    "docker": {
+      "image": "klaemo/couchdb:latest",
+      "network": "HOST",
+      "privileged": true,
+      "parameters": []
+    }
+  },
+  "args": [],
+  "cpus": 4,
+  "mem": 6144,
+  "env": {
+	  "COUCHDB_USER":"YOUR.USER",
+	  "COUCHDB_PASSWORD":"YOUR.PASS",
+	  "NODENAME":"YOUR.NODENAME"
+  },
+  "instances": 1,
+  "constraints": [["hostname", "LIKE","YOUR.NODENAME"]]
+} 

@@ -18,8 +18,9 @@ The workload read data from Softlayer Object Storage with [Spark Swift integrati
 
 #### Other run examples
 
-* [Cloudant](config/cloudant)
 * [Cassandra](config/cassandra)
+* [Cloudant](config/cloudant)
+* [CouchDB](config/couchdb)
 
 ### The Spark Mesos Docker Image 
 
